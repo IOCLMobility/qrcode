@@ -1,45 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>QR Code Generator</title>
-<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
-<style>
-  #qrcode-container {
-    text-align: center;
-    margin-top: 50px;
+<title>App Redirect</title>
+<script>
+  function redirectToAppStore() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(userAgent)) {
+      window.location.replace("https://play.google.com/store/apps/details?id=cx.indianoil.in&hl=en_IN"); // Replace with your Android app link
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location.replace("https://apps.apple.com/in/app/indianoil-one/id1444511410"); // Replace with your iOS app link
+    } else {
+      // Optional: Redirect to a fallback page or display a message
+      window.location.replace("YOUR_FALLBACK_LINK_HERE"); // Optional fallback
+      // or
+      // alert("App not available on this platform.");
+    }
   }
-</style>
+
+  // Call the function when the page loads
+  window.onload = redirectToAppStore;
+
+</script>
 </head>
 <body>
 
-<div id="qrcode-container">
-  <h2>Scan the QR Code</h2>
-  <div id="qrcode"></div>
-</div>
-
-<script>
-  function generateQRCode(text) {
-    var qrcode = qrcode_generator.QrCode.QRCode;
-    var qr = qrcode(0, 'L');
-    qr.addData(text);
-    qr.make();
-    return qr.createImgTag(4, 0); // Size 4, border 0
-  }
-
-  // Replace with your desired URL or text
-  var iosUrl = "https://apps.apple.com/in/app/indianoil-one/id1444511410"; // Replace with your iOS app link
-  var androidUrl = "hhttps://play.google.com/store/apps/details?id=cx.indianoil.in&hl=en_IN"; // Replace with your Android app link
-
-  // Generate QR code for iOS
-  var iosQrCodeImg = generateQRCode(iosUrl);
-  // Generate QR code for Android
-  var androidQrCodeImg = generateQRCode(androidUrl);
-
-  //Display both QR codes.
-  document.getElementById("qrcode").innerHTML = "<p>iOS:</p>" + iosQrCodeImg + "<p>Android:</p>" + androidQrCodeImg;
-
-
-</script>
+<p>Redirecting...</p>
 
 </body>
 </html>
