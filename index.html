@@ -6,11 +6,23 @@
   function redirectToAppStore() {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (/android/i.test(userAgent)) {
-      window.location.replace("https://play.google.com/store/apps/details?id=cx.indianoil.in&hl=en_IN"); // Replace with your Android app link
-    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      window.location.replace("https://apps.apple.com/in/app/indianoil-one/id1444511410"); // Replace with your iOS app link
-    } else {
+    if (isAndroid) {
+    // Try opening the app
+    window.location.href = "indianoil://open";
+
+    // Fallback to Play Store
+    setTimeout(function() {
+      window.location.replace("https://play.google.com/store/apps/details?id=cx.indianoil.in&hl=en_IN");
+    }, 1500);
+
+  } else if (isIOS) {
+    // Try opening the app
+    window.location.href = "indianoil://open";
+
+    // Fallback to App Store
+    setTimeout(function() {
+      window.location.replace("https://apps.apple.com/in/app/indianoil-one/id1444511410");
+    }, 1500) } else {
       // Optional: Redirect to a fallback page or display a message
       alert("Oops , Device OS not detected.");
       // alert("App not available on this platform.");
