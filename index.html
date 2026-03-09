@@ -5,7 +5,9 @@
 <script>
   function redirectToAppStore() {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
+    var isAndroid = /android/i.test(userAgent);
+    var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+  
     if (isAndroid) {
     // Try opening the app
     window.location.href = "indianoil://open";
